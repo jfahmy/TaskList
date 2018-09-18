@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TaskList</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <h1> TASKLIST APP </h1>
+    <section class="task-box">
+      <nav>
+        <ul>
+          <li>Add Task </li>
+          <li>All Tasks </li>
+        </ul>
+      </nav>
+      <%= yield %>
+
+    </section>
+    <footer>
+      <p>
+        ♡ copyright 2018 Ada Stuff
+      </p>
+    </footer>
+  </body>
+</html>

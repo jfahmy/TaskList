@@ -1,0 +1,19 @@
+  <h3 class="routine-title">My morning routine:</h3>
+  <ol class="task-list">
+    <% @tasks.each do |task| %>
+      <li>
+        <%= task.name %>
+        <ul>
+          <li>
+            Mark Complete
+          </li>
+          <li>
+            Edit
+          </li>
+          <li>
+            Delete
+          </li>
+        </ul>
+      </li>
+    <% end %>
+  </ol>
