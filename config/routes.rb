@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   # patch '/tasks/:id', to: "tasks#update"
   #
   # delete '/tasks/:id', to: "tasks#destroy", as: "delete_task"
+  patch '/tasks/:id/complete', to: "tasks#strikethrough", as: "strikethrough_task"
+  patch '/tasks/:id/incomplete', to: "tasks#strikethrough", as: "normalize_task"
+
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

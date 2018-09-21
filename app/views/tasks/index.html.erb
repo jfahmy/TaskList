@@ -2,13 +2,18 @@
   <ol class="task-list">
     <% @tasks.each do |task| %>
       <li>
-        <a href="<%= task_path(task.id) %>">
-        <%= task.name %>
-        </a>
+        <% if task.complete == false %>
+            <%= link_to "#{task.name}", task_path(task.id) %>
+        <% else %>
+            <%= link_to "#{task.name}", task_path(task.id), class: "task_complete" %>
+        <% end %>
         <ul>
           <li>
-            <!-- <%#= form_with model: @task, class: "form" do |f| %>
-              <%#= f.label :complete, "Mark Complete" %> -->
+            <% if task.complete == false %>
+                <%= link_to "Mark Complete", strikethrough_task_path(task.id), method: :patch %>
+            <% else %>
+                  <%= link_to "Mark Incomplete", normalize_task_path(task.id), method: :patch %>
+            <% end %>
           </li>
           <li>
             <%= link_to "Edit", edit_task_path(task.id) %>

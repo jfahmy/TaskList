@@ -1,0 +1,12 @@
+<%= form_with model: @task, class: "form" do |f| %>
+<h3> <%= action_name %> </h3>
+<ul>
+  <li><%= f.label :name, "Task Name:" %>
+  <%= f.text_field :name %></li>
+  <li><%= f.label :description, "Description:" %>
+  <%= f.text_field :description %></li>
+  <li><%= f.label :completion_time, "Completed By:" %>
+  <%= f.text_field :completion_time %></li>
+  <li><%= f.submit button, class: "button"%></li>
+</ul>
+<% end %>

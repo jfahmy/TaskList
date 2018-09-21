@@ -1,17 +1,13 @@
-# TASKS = [
-#   { id: 1, name: "Chug Water", description: "Everyone must hydrate!!!", completion_time: "6:00am"},
-#   { id: 2, name: "Stretch", description: "Get flexy and stretchy for a bit, preferably with a back round tune.", completion_time: "6:15am"},
-#   { id: 3, name: "Meditate", description: "Grab those mala beads and recite some affirmations. Or, at least keep your eyes closed and breath.", completion_time: "6:30am"},
-#   { id: 4, name: "Read Grokking Algorithms", description: "Put in 20 minutes with the Grokking book. Sketch out solutions in your notebook.", completion_time: "6:55am"}
-# ]
+require 'date'
 
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all.order(:completion_time)
+    @tasks = Task.all.order(:completion_date)
   end
 
   def show
-    @task = Task.find(params[:id].to_i)
+    id = params[:id].to_i
+    @task = Task.find_by(id: id)
 
     if @task.nil?
       render :notfound, status: :not_found
@@ -19,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(name: params[:task][:name], description: params[:task][:description], completion_time: params[:task][:completion_time])
+    @task = Task.new(book_params)
     if @task.save
       redirect_to root_path
     else
@@ -36,11 +32,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find(params[:id].to_i)
-    @task.name = params[:task][:name]
-    @task.description = params[:task][:description]
-    @task.completion_time = params[:task][:completion_time]
-    @task.save
+    task = Task.find(params[:id].to_i)
+    task.update(book_params)
     redirect_to task_path
   end
 
@@ -49,5 +42,24 @@ class TasksController < ApplicationController
     @deleted_task = task.destroy
 
   end
+
+  def strikethrough
+    @task = Task.find(params[:id].to_i)
+    if @task.complete == false
+      @task.complete = true
+      @task.completion_date = DateTime.now
+    elsif @task.complete == true
+      @task.complete = false
+      @task.completion_date = nil
+    end
+    @task.save
+
+    redirect_to root_path
+  end
+
+  private
+    def book_params
+      return params.require(:task).permit(:name, :description, :completion_date)
+    end
 
 end
