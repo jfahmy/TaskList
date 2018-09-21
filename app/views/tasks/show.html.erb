@@ -1,10 +1,19 @@
 <section class="one-task">
-  <% if @task.nil? %>
+  <!-- <% if @task.nil? %>
     <h1> 404 NOT FOUND DUDE </h1>
-  <% else %>
+  <% else %> -->
     <h1>Task: <%= @task.name %> </h1>
     <p><%= @task.description %> </p>
     <h3>Must be completed by: <%= @task.completion_time%> </h3>
-  <% end %>
+  <!-- <% end %> -->
+
+  <!-- <nav>
+    <ul>
+      <li><%= link_to "Edit Task", edit_task_path %></li>
+      <li><%= link_to "Delete Task",
+    </ul>
+  </nav> -->
+
+
 
 </section>

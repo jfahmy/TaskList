@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,8 +15,8 @@
     <section class="task-box">
       <nav>
         <ul>
-          <li>Add Task </li>
-          <li>All Tasks </li>
+          <li><%= link_to "New Task", new_task_path%> </li>
+          <li><%= link_to "All Tasks", root_path %></li>
         </ul>
       </nav>
       <%= yield %>

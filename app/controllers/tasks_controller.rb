@@ -11,8 +11,43 @@ class TasksController < ApplicationController
   end
 
   def show
-    id = params[:id]
-    @task = Task.find_by(id: id )
+    @task = Task.find(params[:id].to_i)
+
+    if @task.nil?
+      render :notfound, status: :not_found
+    end
+  end
+
+  def create
+    @task = Task.new(name: params[:task][:name], description: params[:task][:description], completion_time: params[:task][:completion_time])
+    if @task.save
+      redirect_to root_path
+    else
+      render :new
+    end
+  end
+
+  def new
+    @task = Task.new
+  end
+
+  def edit
+    @task = Task.find(params[:id].to_i)
+  end
+
+  def update
+    @task = Task.find(params[:id].to_i)
+    @task.name = params[:task][:name]
+    @task.description = params[:task][:description]
+    @task.completion_time = params[:task][:completion_time]
+    @task.save
+    redirect_to task_path
+  end
+
+  def destroy
+    task = Task.find(params[:id].to_i)
+    @deleted_task = task.destroy
+
   end
 
 end
